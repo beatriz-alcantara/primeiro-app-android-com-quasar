@@ -1,36 +1,39 @@
 <template>
   <q-page class="flex flex-center">
     <div>
-      <p>Geolocation: {{ teste }}</p>
-      <q-btn label="geolocation" @click="getLocation()"/>
+      <p>Latidude: {{ localizacao.coords.latitude }}</p>
+      <p> Longitude: {{ localizacao.coords.longitude }} </p>
+      <q-btn label="Pegar localização" @click="getLocalizacao()"/>
     </div>
   </q-page>
 </template>
 
 <script>
-// const onDeviceReady = () => {
-//   console.log('navigator.geolocation works well')
-// }
-// document.addEventListener('deviceready', onDeviceReady, false)
+document.addEventListener('deviceready', () => {
+  console.log('Geolocation pronta')
+}, false)
 export default {
   name: 'PageIndex',
   data () {
     return {
-      posicionamento: {
+      localizacao: {
         coords: {
-          latitude: null
+          latitude: null,
+          longitude: null
         }
-      },
-      teste: null
+      }
     }
   },
   methods: {
-    getLocation () {
-      navigator.geolocation.getCurrentPosition((posicionamento) => {
-        // this.posicionamento = posicionamento
-        this.teste = 'Olá'
+    getLocalizacao () {
+      navigator.geolocation.getCurrentPosition((posicao) => {
+        console.log('posição: ', posicao)
+        this.localizacao = posicao
       })
     }
+  },
+  created () {
+    this.getLocalizacao()
   }
 }
 </script>
