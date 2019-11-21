@@ -24,6 +24,9 @@ export default {
       }
     }
   },
+  mounted () {
+    window.QRScanner.cancelScan()
+  },
   methods: {
     getLocalizacao () {
       navigator.geolocation.getCurrentPosition((posicao) => {
